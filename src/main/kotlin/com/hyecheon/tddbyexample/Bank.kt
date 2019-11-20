@@ -4,6 +4,6 @@ import java.util.*
 
 class Bank {
 	fun reduce(source: Expression, toCurrency: String): Money {
-		return Money.dollar(10)
+		return source.reduce(toCurrency)
 	}
 }

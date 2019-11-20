@@ -21,8 +21,10 @@ open class Money(val amount: Int, val currency: String) : Expression {
 		return "Money(amount=$amount, currency='$currency')"
 	}
 
-	fun plus(money: Money): Expression {
-		return Money(amount + money.amount, currency)
+	override fun reduce(to: String): Money = this
+
+	fun plus(addend: Money): Expression {
+		return Sum(this, addend)
 	}
 
 	companion object {
