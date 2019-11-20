@@ -1,8 +1,6 @@
 package com.hyecheon.tddbyexample
 
-import java.util.*
-
-open class Money(protected val amount: Int, private val currency: String) {
+open class Money(val amount: Int, val currency: String) : Expression {
 	fun times(multiplier: Int) = Money(amount * multiplier, currency);
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
@@ -23,9 +21,12 @@ open class Money(protected val amount: Int, private val currency: String) {
 		return "Money(amount=$amount, currency='$currency')"
 	}
 
-	companion object {
-		fun franc(amount: Int) = Franc(amount, "USD")
-		fun dollar(amount: Int) = Dollar(amount, "CHF")
+	fun plus(money: Money): Expression {
+		return Money(amount + money.amount, currency)
 	}
 
+	companion object {
+		fun franc(amount: Int) = Money(amount, "CHF")
+		fun dollar(amount: Int) = Money(amount, "USD")
+	}
 }
