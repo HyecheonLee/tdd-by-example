@@ -1,7 +1,6 @@
 package com.hyecheon.tddbyexample
 
-open class Money(val amount: Int, val currency: String) : Expression {
-	fun times(multiplier: Int) = Money(amount * multiplier, currency);
+class Money(val amount: Int, val currency: String) : Expression {
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
 		if (other !is Money) return false
@@ -25,9 +24,14 @@ open class Money(val amount: Int, val currency: String) : Expression {
 		return Money(amount / bank.rate(currency, to), to)
 	}
 
-	fun plus(addend: Money): Expression {
+	override fun plus(addend: Expression): Expression {
 		return Sum(this, addend)
 	}
+
+	override fun times(multiplier: Int): Expression {
+		return Money(amount * multiplier, this.currency)
+	}
+
 
 	companion object {
 		fun franc(amount: Int) = Money(amount, "CHF")

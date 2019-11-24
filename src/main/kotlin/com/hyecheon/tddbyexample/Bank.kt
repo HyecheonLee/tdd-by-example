@@ -17,4 +17,5 @@ class Bank {
 	fun addRate(from: String, to: String, rate: Int) {
 		rateMap[Pair(from, to)] = rate
 	}
+
 }
